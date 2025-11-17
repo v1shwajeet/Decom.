@@ -3,19 +3,21 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
+import Navbar from './src/components/navbar'
 
 const Home = () => {
   return (
     <>
+    <Navbar/>
       <MaxWidthWrapper className='flex flex-col justify-center text-center items-center pt-16 md:pt-24 sm:pt-20'>
         <p className='text-sm font-semibold text-gray-700 rounded-full border border-gray-200 bg-white/80 px-6 py-1.5 shadow-sm hover:border-gray-300 hover:bg-white/90 '>
-          Resumer is now public!
+          Decom is now public!
         </p>
         <h1 className='max-w-3xl text-4xl font-bold tracking-tight my-4 md:text-6xl lg:text-7xl'>
-          Chat with your <span className='text-blue-600'>documents</span> in seconds.
+          Chat with your <span className='text-blue-500'>documents</span> in seconds.
         </h1>
         <p className='max-w-2xl text-sm text-zinc-700 md:text-lg'>
-          Resumer lets you have natural conversations with any document. Upload your file and instantly ask follow-up questions, get summaries, and pull out the details that matter.
+          Decom lets you have natural conversations with any document. Upload your file and instantly ask follow-up questions, get summaries, and pull out the details that matter.
         </p>
         <div className='mt-3 flex items-center gap-3'>
           <Link
@@ -54,7 +56,7 @@ const Home = () => {
               Start chatting in minutes
             </h2>
             <p className='mt-4 text-sm text-gray-600 sm:text-base md:text-lg'>
-              Go from static resumes and PDFs to interactive conversations in just a few simple steps with Resumer.
+              Go from static resumes and PDFs to interactive conversations in just a few simple steps with Decom.
             </p>
           </div>
         </div>
@@ -82,7 +84,7 @@ const Home = () => {
                 Upload your documents
               </span>
               <span className='mt-2 text-sm text-zinc-700'>
-                Drop in your resumes, PDFs, or other files. Resumer securely processes them so they&apos;re ready for conversation.
+                Drop in your resumes, PDFs, or other files. Decom securely processes them so they&apos;re ready for conversation.
               </span>
             </div>
           </li>
@@ -105,7 +107,7 @@ const Home = () => {
           <div className='-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 sm:-m-4 sm:rounded-2xl sm:p-4'>
             <Image
               src='/dashboard-preview.png'
-              alt='Resumer document chat preview'
+              alt='Decom document chat preview'
               width={1419}
               height={732}
               quality={100}
