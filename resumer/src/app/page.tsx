@@ -1,14 +1,13 @@
-import MaxWidthWrapper from './src/components/MaxWidthWrapper'
+import MaxWidthWrapper from '../components/MaxWidthWrapper'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/src/components/ui/button'
 import Image from 'next/image'
-import Navbar from './src/components/navbar'
+import Navbar from '../components/navbar'
 
 const Home = () => {
   return (
     <>
-    <Navbar/>
       <MaxWidthWrapper className='flex flex-col justify-center text-center items-center pt-16 md:pt-24 sm:pt-20'>
         <p className='text-sm font-semibold text-gray-700 rounded-full border border-gray-200 bg-white/80 px-6 py-1.5 shadow-sm hover:border-gray-300 hover:bg-white/90 '>
           Decom is now public!
