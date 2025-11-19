@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/src/components/ui/button'
 import Image from 'next/image'
-import Navbar from '../components/navbar'
 
 const Home = () => {
   return (
@@ -109,7 +108,6 @@ const Home = () => {
               alt='Decom document chat preview'
               width={1419}
               height={732}
-              quality={100}
               className='rounded-lg bg-white p-3 shadow-2xl ring-1 ring-gray-900/10 sm:p-6 md:p-10'
             />
           </div>
