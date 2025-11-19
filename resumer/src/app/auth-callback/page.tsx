@@ -1,10 +1,13 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { trpc } from '../_trpc/client'
 
-const AuthCallback = () => {
-    const router = useRouter();
+function page() {
 
-    const searchparams = useSearchParams()
-    const origin = searchparams.get('origin')
+  const router = useRouter()
+  const origin = useSearchParams().get('origin')
+  // we are passing string hello to data thus the data type will be of string hence its working
+  const {data, isLoading} = trpc.test.useQuery() // useQuery is used as we had defined test:query in index.ts in trpc folder
 }
 
-export default AuthCallback
+export default page
