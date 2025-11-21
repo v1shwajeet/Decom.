@@ -1,20 +1,42 @@
+"use client"
+
+import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { trpc } from '../_trpc/client'
+import { Loader2 } from 'lucide-react'
 
-const page = async () => {
-
+const page = () => {
   const router = useRouter()
   const origin = useSearchParams().get('origin')
 
-  const {data,isLoading} = trpc.authCallback.useQuery(undefined, {
-    onSuccess:({success}) => {
-      if(success){
-        router.push(origin ? `/${origin}` : '/dashboard')
-      }
-    }})
-  // // we are passing string hello to data thus the data type will be of string hence its working
-  // const {data, isLoading} = trpc.test.useQuery() // useQuery is used as we had defined test:query in index.ts in trpc folder
+  const { data, error } = trpc.authCallback.useQuery(undefined, {
+    retry: false,
+    // retryDelay: 500,
+  })
 
+  useEffect(() => {
+    if (data?.success) {
+      router.push(origin ? `/${origin}` : '/dashboard')
+    }
+  }, [data, origin, router])
+
+  useEffect(() => {
+    if (error?.data?.code === 'UNAUTHORIZED') {
+      router.push('/sign-in')
+    }
+  }, [error, router])
+
+  return (
+    <div className='w-full mt-24 flex justify-center'>
+      <div className='flex flex-col items-center gap-2'>
+        <Loader2 className='h-8 w-8 animate-spin text-zinc-800' />
+        <h3 className='font-semibold text-xl'>
+          Setting up your account...
+        </h3>
+        <p>You will be redirected automatically.</p>
+      </div>
+    </div>
+  )
 }
 
 export default page

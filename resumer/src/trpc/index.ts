@@ -1,37 +1,44 @@
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
-import { TRPCError } from '@trpc/server';
-import { publicProcedure, router } from './trpc';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { TRPCError } from '@trpc/server'
+import { privateProcedure, publicProcedure, router } from './trpc'
+import { db } from '@/db'
 
 export const appRouter = router({
-  authCallback: publicProcedure.query(async () => {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+  authCallback: publicProcedure.query(async () => { 
+      const { getUser } = getKindeServerSession()
+      const user = await getUser()
 
-    if (!user || !user.id || !user.email) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
+      if (!user || !user.id || !user.email) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' })
+      }
 
-    // TODO: check if the user exists in the database and create them if not
-    return { success: true };
-  }),
-  // test: publicProcedure.query(()=>{
-  //   return "Hello"
-  // }) // query for get while mutation for put,patch,delete
-});
+      const dbUser = await db.user.findFirst({
+        where: { id: user.id },
+      })
 
-export type AppRouter = typeof appRouter;
+      if (!dbUser) {
+        await db.user.create({
+          data: {
+            id: user.id,
+            email: user.email,
+          },
+        })
+      }
 
-/* 
-appRouter is your entire tRPC backend API collected into one object.
+      return { success: true }
+    }),
 
-export const appRouter = router({
-  authCallback,
-  // in future: user, posts, products, etc…
-});
+  getUserFiles: privateProcedure.query(async ({ctx}) => {
+    const {userId, user} = ctx
 
-Think of it like:
+    return await db.file.findMany({
+      where: {
+        userId
+      }
+    })
+  })
 
-"This is my backend. These are all the functions my frontend is allowed to call."
 
-tRPC calls those functions procedures.
-*/
+    
+})
+export type AppRouter = typeof appRouter

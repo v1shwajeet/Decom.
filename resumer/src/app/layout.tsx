@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { cn } from "../lib/utils";
 import "./globals.css";
 import Navbar from "../components/navbar";
+import Providers from "../components/providers";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body
-        className={cn(`min-h-screen font-sans antialiased`,geistSans.variable, geistMono.variable)}
-      >
-        <Navbar/>
+      <Providers>      
+        <body className={cn(`min-h-screen font-sans antialiased`, geistSans.variable, geistMono.variable)}>
+        <Navbar />
         {children}
-      </body>
+        </body>
+      </Providers>
     </html>
   );
 }
