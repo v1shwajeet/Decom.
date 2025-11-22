@@ -12,7 +12,7 @@ const Navbar = () => {
                     <Link href='/' className="flex z-40 font-semibold">
                     <span>Decom.</span>
                     </Link>  
-                    <div className="flex gap-3.5">
+                    <div className="flex gap-3.5"> 
                         <Link href='/pricing' className={buttonVariants({
                             variant: 'ghost',
                             size: 'sm'
