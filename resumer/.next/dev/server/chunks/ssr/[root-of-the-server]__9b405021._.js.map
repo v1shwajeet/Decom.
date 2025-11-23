@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/vishwajeetgehlot/Downloads/Project-1/resumer/src/app/dashboard/page.tsx"],"sourcesContent":["import { db } from \"@/db\";\nimport {getKindeServerSession} from \"@kinde-oss/kinde-auth-nextjs/server\";\nimport { redirect } from \"next/navigation\";\nimport Dashboard from \"@/components/Dashboard\";\n\n const dashboard = async() => {\n\n    const {getUser} = getKindeServerSession();\n    const user = await getUser();\n\n    if(!user || !user.id) redirect('/auth-callback?origin=dashboard')\n\n    const dbUser = await db.user.findFirst({\n      where: {\n        id: user.id,\n      },\n    });\n\n    if(!dbUser) redirect('/auth-callback?origin=dashboard');\n\n// console.log(user);\n  return (\n    <Dashboard />\n  )\n}\n\nexport default dashboard"],"names":[],"mappings":";;;;;;;;;;AACA;AAAA;AACA;AAAA;;;;;;;;;;;AAGC,MAAM,YAAY;IAEf,MAAM,EAAC,OAAO,EAAC,GAAG,IAAA,+QAAqB;IACvC,MAAM,OAAO,MAAM;IAEnB,IAAG,CAAC,QAAQ,CAAC,KAAK,EAAE,EAAE,IAAA,iMAAQ,EAAC;IAE/B,MAAM,SAAS,MAAM,GAAG,IAAI,CAAC,SAAS,CAAC;QACrC,OAAO;YACL,IAAI,KAAK,EAAE;QACb;IACF;IAEA,IAAG,CAAC,QAAQ,IAAA,iMAAQ,EAAC;IAEzB,qBAAqB;IACnB,qBACE,8OAAC;;;;;AAEL;uCAEe"}}]
+}
